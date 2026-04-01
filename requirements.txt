@@ -1,0 +1,9 @@
+easyocr
+opencv-python-headless
+fastapi
+uvicorn[standard]
+python-multipart
+streamlit
+pandas
+pillow
+requests
