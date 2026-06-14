@@ -3,9 +3,11 @@
 Automatically extracts structured data from invoice images using Computer Vision and OCR.
 
 ## What it does
+
 Upload any invoice image → instantly get vendor, invoice number, dates, tax, and total as structured JSON.
 
 ## Tech stack
+
 - **OpenCV** — image preprocessing (grayscale, binarization, denoising)
 - **EasyOCR** — deep learning text detection and recognition
 - **FastAPI** — REST API endpoint
@@ -14,42 +16,67 @@ Upload any invoice image → instantly get vendor, invoice number, dates, tax, a
 - **pandas** — data export (JSON, CSV)
 
 ## Project structure
+
+```
 invoice-ocr-pipeline/
-├── ocr_engine.py      # OpenCV preprocessing + EasyOCR
-├── extractor.py       # regex field extraction
-├── api.py             # FastAPI REST backend
-├── app.py             # Streamlit frontend
+├── ocr_engine.py   # OpenCV preprocessing + EasyOCR
+├── extractor.py    # regex field extraction
+├── api.py          # FastAPI REST backend
+├── app.py          # Streamlit frontend
 └── requirements.txt
+```
 
 ## Run locally
 
 ### 1. Clone the repo
+
+```bash
 git clone https://github.com/YOUR_USERNAME/invoice-ocr-pipeline.git
 cd invoice-ocr-pipeline
+```
 
 ### 2. Create virtual environment
+
+```bash
 python -m venv venv
-venv\Scripts\activate      # Windows
-source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate   # Windows
+source venv/bin/activate  # Mac/Linux
+```
 
 ### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
 ### 4. Run (two terminals)
-# Terminal 1 - API
-python -m uvicorn api:app --reload
 
-# Terminal 2 - UI
+**Terminal 1 — API**
+```bash
+python -m uvicorn api:app --reload
+```
+
+**Terminal 2 — UI**
+```bash
 streamlit run app.py
+```
 
 ### 5. Open browser
+
+```
 http://localhost:8501
+```
 
 ## API usage
-POST /extract — upload invoice image, returns structured JSON
-GET  /health  — health check
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/extract` | Upload invoice image, returns structured JSON |
+| `GET` | `/health` | Health check |
 
 ## Sample output
+
+```json
 {
   "vendor": "East Repair Inc.",
   "invoice_number": "US-001",
@@ -60,3 +87,4 @@ GET  /health  — health check
   "total": 154.06,
   "currency": "USD"
 }
+```
